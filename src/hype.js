@@ -57,10 +57,12 @@ class Hype {
         // Read all the args!
         while(args.length) {
             let arg = args.shift();
-
-            if(arg.match('#') || arg.match('.')) {
-              let id = arg.split('#')[1];
-              let className = arg.split('.')[1];
+            
+            if(this.typeOf(arg, 'string')) {
+              if(arg.match('#') || arg.match('.')) {
+                let id = arg.split('#')[1];
+                let className = arg.split('.')[1];
+              }
             }
             if( this.typeOf(arg, 'string') ) {
                 text = arg;
