@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hype Test</title>
+    <link href='https://fonts.googleapis.com/css?family=Raleway:400,600' rel='stylesheet' type='text/css'>
+    <meta name="viewport" content="width=device-width">
+    <meta name="theme-color" content="#673AB7">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 12px;
+            padding: 0;
+            font-family: 'Raleway', sans-serif;
+            background: linear-gradient(to left, #FFC107, #673AB7);
+        }
+
+        .app {
+            padding: 2rem 1rem;
+            background: #fff;
+            height: 100%;
+            min-height: calc(100vh - 24px);
+        }
+
+        @media all and (min-width: 75em) {
+            .footer {
+                position: fixed;
+                bottom: .75rem;
+                width: 90%;
+                width: calc(100% - (4rem + 24px));
+                background: #fff;
+                padding: .5rem;
+            }
+        }
+        .title {
+            font-size: 36px;
+            display: inline-block;
+            color: #FFC107;
+            background: linear-gradient(to right, #FFC107 0%, #673AB7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: .75rem;
+            border: 5px solid #f1f1f1;
+            padding: .5rem;
+            text-align: center;
+        }
+
+        .title:hover {
+            color: #fff;
+            -webkit-text-fill-color: #fff;
+            background: linear-gradient(to right, #673AB7 0%, #FFC107 100%);
+        }
+
+        a {
+            display: inline-block;
+            font-weight: bold;
+            padding: .125rem .25rem;
+            color: #673AB7;
+            background: linear-gradient(to right, #673AB7 0%, #FFC107 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            border-bottom: 5px solid #f1f1f1;
+        }
+
+        a:hover {
+            color: #fff;
+            -webkit-text-fill-color: #fff;
+            background: linear-gradient(to right, #673AB7 0%, #FFC107 100%);
+            border-bottom: 5px solid transparent;
+        }
+    </style>
+</head>
+<body>
+<main class="app">
+    <h1 class="title">HYPE.js Demo</h1>
+    <h3>Rendering a shopping list from JSON</h3>
+    <div id="shopping-list"></div>
+    <footer class="footer">
+        <p>Made by <a href="http://kevingimbel.com">Kevin Gimbel</a>. Based on <a href="https://github.com/dominictarr/hyperscript">Hyperscript.JS</a> by
+        <a href="https://github.com/dominictarr">Dominic Tarr</a>. This script is not intended for use in production but rather written just to learn more JavaScript.</p>
+    </footer>
+</main>
+<script src="src/hype.js"></script>
+<script>
+    const Tags = ['div', 'p', 'h1', 'ul', 'li', 'a'];
+    const sstyle = {style: 'font-size: .95rem; color: red; border-bottom: 2px solid #ddd;'}
+    const h = new Hype();
+    const list_output = document.getElementById('shopping-list');
+
+    h.createTags(Tags);
+
+    const groceries = [
+        {
+            name: 'Milk',
+            type: 'food',
+            price: 1.29,
+            amount: '6'
+        },{
+            name: 'Apples',
+            type: 'food',
+            price: 0.99,
+            amount: '12'
+        },{
+            name: 'Bread',
+            type: 'food',
+            price: 0.79,
+            amount: '6'
+        },{
+            name: 'Washing-up Liquid',
+            type: 'domestic remedy',
+            price: 1.79,
+            amount: '2'
+        }
+    ];
+    let data_length = groceries.length;
+
+
+    const shopping_list = [];
+    let price = 0;
+    function renderItems(dataArray) {
+      let returnedArray = [];
+
+      dataArray.forEach( (item) => {
+          let content = item.amount + 'x ' + item.name + '<small> ('+ item.price +'€/each)</small>';
+          price +=  item.price;
+          returnedArray.push( li(content) );
+      });
+
+
+      let list = ul(returnedArray, [
+        li('Estimated price: ' + price + '€', {style: 'padding-top: 1rem;'})
+      ]);
+
+      h.append(list, list_output);
+      console.log('HEY?!');
+    }
+
+    renderItems(groceries, shopping_list);
+
+    setInterval( () => {
+      console.log('thick');
+      if(data_length !== groceries.length) {
+        data_length = groceries.length;
+        renderItems(groceries, shopping_list);
+
+        console.log('Array changed!');
+      }
+    }, 1000);
+</script>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hype Test</title>
+    <link href='https://fonts.googleapis.com/css?family=Raleway:400,600' rel='stylesheet' type='text/css'>
+    <meta name="viewport" content="width=device-width">
+    <meta name="theme-color" content="#673AB7">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 12px;
+            padding: 0;
+            font-family: 'Raleway', sans-serif;
+            background: linear-gradient(to left, #FFC107, #673AB7);
+        }
+
+        .code_block pre {
+            background: #E3F2FD;
+            padding: 1rem;
+            overflow: auto;
+            width: 100%;
+        }
+
+        .app {
+            padding: 2rem 1rem;
+            background: #fff;
+            height: 100%;
+            min-height: calc(100vh - 24px);
+        }
+
+        @media all and (min-width: 75em) {
+            .footer {
+                position: fixed;
+                bottom: .75rem;
+                width: 90%;
+                width: calc(100% - (4rem + 24px));
+                background: #fff;
+                padding: .5rem;
+            }
+        }
+        .grid {
+            display: flex;
+            flex-direction: row;
+        }
+        .one-half {
+           width: 50%;
+           padding: 1.25rem;
+        }
+
+        @media all and (max-width: 75em) {
+            .grid {
+                flex-direction: column;
+            }
+
+            .one-half {
+                width: 100%;
+            }
+            .footer {
+                padding: 0;
+            }
+        }
+        .title {
+            font-size: 36px;
+            display: inline-block;
+            color: #FFC107;
+            background: linear-gradient(to right, #FFC107 0%, #673AB7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: .75rem;
+            border: 5px solid #f1f1f1;
+            padding: .5rem;
+        }
+
+        .title:hover {
+            color: #fff;
+            -webkit-text-fill-color: #fff;
+            background: linear-gradient(to right, #673AB7 0%, #FFC107 100%);
+        }
+
+        a {
+            display: inline-block;
+            font-weight: bold;
+            padding: .125rem .25rem;
+            color: #673AB7;
+            background: linear-gradient(to right, #673AB7 0%, #FFC107 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            border-bottom: 5px solid #f1f1f1;
+        }
+
+        a:hover {
+            color: #fff;
+            -webkit-text-fill-color: #fff;
+            background: linear-gradient(to right, #673AB7 0%, #FFC107 100%);
+            border-bottom: 5px solid transparent;
+        }
+    </style>
+</head>
+<body>
+<main class="app">
+    <div class="grid">
+        <div class="code_block one-half">
+            <h1 class="title">HYPE.js</h1>
+            <h5><a href="https://github.com/dominictarr/hyperscript">Hyperscript</a> implementation</h5>
+            <p>Everything in the output tab is generated with the following Code.</p>
+        <pre><code>
+const Tags = ['div', 'p', 'link', 'script', 'h1', 'ul', 'li', 'a'];
+const sstyle = {style: 'font-size: .95rem; color: red; border-bottom: 2px solid #ddd;'}
+const h = new Hype();
+h.createTags(Tags);
+const content = [
+h1('Hello world!'),
+h.hy('h2', {}, 'Single Item rendering with <code>h.hy</code>'),
+div('Nested rendering with <code>div()</code> function', [
+    p('Text rendering with the <code>p()</code> function.'),
+    p('Another line!')
+              ]),
+div('AAAAND we have a list!', [
+    ul([
+        li('This is a list item.'),
+        li('Aaaand another list item.'),
+        li('We could do this forever :) .'),
+    ])
+]),
+div('Creating Links with Attributes.',[
+    a('Click here!', {
+        href: 'https://codepen.com/',
+        title: 'CodePen - HTML Playground',
+        onClick: "alert('YAY!')"
+    })
+  ])
+];
+const app = document.getElementById('app');
+h.append(content, app);
+        </code></pre>
+        </div>
+        <div class="one-half">
+            <h2>Output</h2>
+            <div id="app"></div>
+        </div>
+    </div>
+
+<footer class="footer">
+    <p>Made by <a href="http://kevingimbel.com">Kevin Gimbel</a>. Inspired by <a href="https://github.com/dominictarr/hyperscript">Hyperscript.JS</a> by
+    <a href="https://github.com/dominictarr">Dominic Tarr</a>. This script is not intended for use in production but rather written to get deeper into some EcmaScript 6 Features.</p>
+</footer>
+</main>
+<script src="src/hype.js"></script>
+<script>
+    const Tags = ['div', 'p', 'link', 'script', 'h1', 'ul', 'li', 'a'];
+    const sstyle = {style: 'font-size: .95rem; color: red; border-bottom: 2px solid #ddd;'}
+    const h = new Hype();
+    h.createTags(Tags);
+    const content = [
+        h1('Hello world!'),
+        h.hy('h2', {}, 'Single Item rendering with <code>h.hy</code>'),
+        div('Nested rendering with <code>div()</code> function', [
+            p('Text rendering with the <code>p()</code> function.'),
+            p('Another line!')
+        ]),
+        div('AAAAND we have a list!', [
+            ul([
+                li('This is a list item.'),
+                li('Aaaand another list item.'),
+                li('We could do this forever :) .'),
+            ])
+        ]),
+        div('Creating Links with Attributes.',[
+            a('Click here!', {
+                href: 'https://codepen.com/',
+                title: 'CodePen - HTML Playground',
+                onClick: "alert('YAY!')"
+            })
+        ])
+    ];
+    const app = document.getElementById('app');
+    h.append(content, app);
+</script>
+</body>
+</html>
